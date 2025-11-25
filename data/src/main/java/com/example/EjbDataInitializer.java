@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.domain.Comment;
 import com.example.domain.Post;
+import com.example.domain.Status;
 import com.example.repository.CommentRepository;
 import com.example.repository.PostRepository;
 import jakarta.annotation.PostConstruct;
@@ -33,9 +34,16 @@ public class EjbDataInitializer {
         postRepository.deleteAll();
 
         // insert two sample posts
-        Post post1 = Post.builder().title("Post 1").content("Content 1").build();
+        Post post1 = new Post();
+        post1.setTitle("Post 1");
+        post1.setContent("Content 1");
+        post1.setStatus(Status.DRAFT);
         postRepository.insert(post1);
-        Post post2 = Post.builder().title("Post 2").content("Content 2").build();
+
+        Post post2 = new Post();
+        post2.setTitle("Post 2");
+        post2.setContent("Content 2");
+        post2.setStatus(Status.DRAFT);
         postRepository.insert(post2);
 
         // insert two sample comments
