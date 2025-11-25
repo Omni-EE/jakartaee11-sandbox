@@ -21,11 +21,10 @@ public interface Blogger {
 
 
     @Query("""
-            SELECT p.id, p.title FROM Post AS p
-            WHERE p.title LIKE :title
-            ORDER BY p.createdAt DESC
+            WHERE title LIKE :title
+            ORDER BY createdAt DESC
             """)
-    Page<PostSummary> allPosts(@Param("title") String title, PageRequest page);
+    Page<Post> allPosts(@Param("title") String title, PageRequest page);
 
     @Find
     @OrderBy("createdAt")

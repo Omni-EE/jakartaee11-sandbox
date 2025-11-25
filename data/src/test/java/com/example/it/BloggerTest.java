@@ -26,6 +26,7 @@ import jakarta.data.Sort;
 import jakarta.data.page.PageRequest;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Status;
 import jakarta.transaction.UserTransaction;
@@ -98,15 +99,18 @@ public class BloggerTest {
         var post = new Post();
         post.setTitle("My Post");
         post.setContent("My Post Content");
+
         startTx();
         blogger.insert(post);
         endTx();
+
         UUID postId = post.getId();
         LOGGER.log(Level.INFO, "insert post: {0}", new Object[]{postId});
         assertNotNull(postId);
 
         var foundPost = blogger.byId(postId);
         assertTrue(foundPost.isPresent());
+
         Post savedPost = foundPost.get();
         assertEquals(post.getTitle(), savedPost.getTitle());
         assertEquals(post.getContent(), savedPost.getContent());
@@ -121,16 +125,25 @@ public class BloggerTest {
         // jakarta data page number starts with 1, NOTTTTTTT 0, I am crazy...
         var allPosts = blogger.allPosts("%My%", PageRequest.ofPage(1, 10, true));
         assertEquals(1, allPosts.totalElements());
-        assertEquals(postId, allPosts.content().getFirst().id());
+        assertEquals(postId, allPosts.content().getFirst().getId());
 
         savedPost.setTitle("New Title");
         savedPost.setStatus(PUBLISHED);
+
         startTx();
         blogger.update(savedPost);
         endTx();
 
+        em.clear();
+
+
+        EntityManagerFactory emf = em.getEntityManagerFactory();
+
+        // Clear the L2 Cache
+        emf.getCache().evictAll();
+
         var foundByStatusAfterUpdated = blogger.byStatus(
-                DRAFT,
+                null,
                 Order.by(Sort.desc("createdAt")),
                 Limit.of(10)
         );

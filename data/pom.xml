@@ -288,9 +288,9 @@ under the License.
                     <scope>test</scope>
                 </dependency>
                 <dependency>
-                    <groupId>io.github.hantsy.arquillian</groupId>
-                    <artifactId>arquillian-glassfish-managed</artifactId>
-                    <version>${arquillian-glassfish.version}</version>
+                    <groupId>ee.omnifish.arquillian</groupId>
+                    <artifactId>arquillian-glassfish-server-managed</artifactId>
+                    <version>2.1.2</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -335,11 +335,9 @@ under the License.
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${maven-failsafe-plugin.version}</version>
                         <configuration>
-                            <environmentVariables>
-                                <GLASSFISH_HOME>${project.build.directory}/glassfish8</GLASSFISH_HOME>
-                            </environmentVariables>
                             <systemPropertyVariables>
-                                <arquillian.launch>glassfish</arquillian.launch>
+                                <glassfish.home>${project.build.directory}/glassfish8</glassfish.home>
+                                <glassfish.enableDerby>true</glassfish.enableDerby>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

@@ -95,9 +95,9 @@ public class PostResourcesTest {
         var target = client.target(URI.create(baseUrl.toExternalForm() + "api/posts"));
         Response r = target.request().accept(MediaType.APPLICATION_JSON_TYPE).get();
         LOGGER.log(Level.INFO, "Get /posts response status: {0}", r.getStatus());
-        assertEquals(200, r.getStatus());
         String jsonString = r.readEntity(String.class);
         LOGGER.log(Level.INFO, "Get /posts result string: {0}", jsonString);
+        assertEquals(200, r.getStatus());
     }
 
 }

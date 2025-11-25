@@ -7,10 +7,13 @@ import com.example.repository.PostRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
-@Singleton
-@Startup
+@Transactional
+@ApplicationScoped
 public class EjbDataInitializer {
 
     @Inject
@@ -25,7 +28,7 @@ public class EjbDataInitializer {
     // public void init(@Observes @Initialized(ApplicationScoped.class) Object any) {
     // when adding @Transactional on class, still failed the tests, the observer method does not work.
     @PostConstruct
-    public void init() {
+    public void init(@Observes Startup event) {
         commentRepository.deleteAll();
         postRepository.deleteAll();
 

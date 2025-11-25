@@ -54,7 +54,7 @@ public class BlogServiceTest {
                 .addPackage(Post.class.getPackage())
                 .addPackage(PostRepository.class.getPackage())
                 .addPackage(BlogService.class.getPackage())
-                .addAsManifestResource("test-persistence.xml", "persistence.xml")
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         LOGGER.log(Level.INFO, war.toString(true));
         return war;
