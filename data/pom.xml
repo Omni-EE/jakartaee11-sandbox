@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+    license agreements. See the NOTICE file distributed with this work for additional 
+    information regarding copyright ownership. The ASF licenses this file to 
+    you under the Apache License, Version 2.0 (the "License"); you may not use 
+    this file except in compliance with the License. You may obtain a copy of 
+    the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+    by applicable law or agreed to in writing, software distributed under the 
+    License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+    OF ANY KIND, either express or implied. See the License for the specific 
+    language governing permissions and limitations under the License. -->
 
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
--->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>data-examples</artifactId>
-    <packaging>war</packaging>
+
     <parent>
         <groupId>com.example</groupId>
         <artifactId>jakartaee11-sandbox-parent</artifactId>
@@ -30,11 +21,14 @@ under the License.
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <artifactId>data-examples</artifactId>
+    <packaging>war</packaging>
+
     <name>data-examples</name>
     <description>Jakarta EE 11 Sandbox: Jakarta Data 1.0 Examples</description>
+
     <properties>
         <commons-validator.version>1.10.1</commons-validator.version>
-        <lombok.version>1.18.42</lombok.version>
     </properties>
 
     <dependencies>
@@ -46,12 +40,6 @@ under the License.
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>${commons-validator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -93,19 +81,17 @@ under the License.
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.1</version>
                 <configuration>
                     <annotationProcessorPaths>
-                        <annotationProcessorPath>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </annotationProcessorPath>
                         <annotationProcessorPath>
                             <groupId>org.eclipse.persistence</groupId>
                             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
@@ -116,6 +102,7 @@ under the License.
             </plugin>
         </plugins>
     </build>
+
     <profiles>
         <profile>
             <id>glassfish</id>
@@ -133,11 +120,6 @@ under the License.
                         <configuration>
                             <container>
                                 <containerId>glassfish8x</containerId>
-                                <!-- <artifactInstaller>
-                                    <groupId>org.glassfish.main.distributions</groupId>
-                                    <artifactId>glassfish</artifactId>
-                                    <version>${glassfish.version}</version>
-                                </artifactInstaller> -->
                                 <zipUrlInstaller>
                                     <url>
                                         https://github.com/eclipse-ee4j/glassfish/releases/download/${glassfish.version}/glassfish-${glassfish.version}.zip
@@ -192,11 +174,6 @@ under the License.
                         <configuration>
                             <annotationProcessorPaths>
                                 <annotationProcessorPath>
-                                    <groupId>org.projectlombok</groupId>
-                                    <artifactId>lombok</artifactId>
-                                    <version>${lombok.version}</version>
-                                </annotationProcessorPath>
-                                <annotationProcessorPath>
                                     <groupId>org.hibernate.orm</groupId>
                                     <artifactId>hibernate-processor</artifactId>
                                     <version>${hibernate.version}</version>
@@ -205,7 +182,7 @@ under the License.
                         </configuration>
                     </plugin>
 
-                    <!-- unpack a copy of WildFly-->
+                    <!-- unpack a copy of WildFly -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -233,14 +210,15 @@ under the License.
                         </executions>
                     </plugin>
 
-                    <!-- The WildFly plugin deploys your war to a local running WildFly container -->
+                    <!-- The WildFly plugin deploys your war to a local running 
+                        WildFly container -->
                     <!-- To use, run: mvn package wildfly:deploy -->
-                    <!-- For Jakarta EE 9, use `wildfly-preview-dist` as artifactId instead to start
-                    and deploy applications-->
-                    <!-- Run: mvn clean wildfly:run -PWildfly
-                    -Dwildfly.artifactId=wildfly-preview-dist -Dwildfly.version=22.0.0.Alpha1 -->
-                    <!-- or set the `jboss-as.home` to run: mvn clean wildfly:run -PWildfly
-                    -Djboss-as.home=D:\appsvr\wildfly-preview-22.0.0.Alpha1-->
+                    <!-- For Jakarta EE 9, use `wildfly-preview-dist` as 
+                        artifactId instead to start and deploy applications -->
+                    <!-- Run: mvn clean wildfly:run -PWildfly -Dwildfly.artifactId=wildfly-preview-dist 
+                        -Dwildfly.version=22.0.0.Alpha1 -->
+                    <!-- or set the `jboss-as.home` to run: mvn clean wildfly:run 
+                        -PWildfly -Djboss-as.home=D:\appsvr\wildfly-preview-22.0.0.Alpha1 -->
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
@@ -346,10 +324,10 @@ under the License.
         </profile>
         <profile>
 
-            <!-- An optional Arquillian testing profile that executes tests in your
-                WildFly instance -->
-            <!-- This profile will start a new WildFly instance, and execute the test,
-                shutting it down when done -->
+            <!-- An optional Arquillian testing profile that executes tests 
+                in your WildFly instance -->
+            <!-- This profile will start a new WildFly instance, and execute 
+                the test, shutting it down when done -->
             <!-- Run with: mvn clean verify -Parq-wildfly-managed -->
             <id>arq-wildfly-managed</id>
             <properties>
@@ -366,18 +344,14 @@ under the License.
                     <version>${hibernate.version}</version>
                     <scope>provided</scope>
                 </dependency>
-                <!--<dependency>
-                    <groupId>io.undertow</groupId>
-                    <artifactId>undertow-websockets-jsr</artifactId>
-                    <version>${undertow-websockets-jsr.version}</version>
-                    <scope>test</scope>
-                </dependency>-->
+                <!--<dependency> <groupId>io.undertow</groupId> <artifactId>undertow-websockets-jsr</artifactId> 
+                    <version>${undertow-websockets-jsr.version}</version> <scope>test</scope> 
+                    </dependency> -->
 
                 <!-- TESTS -->
                 <!-- JAXRS test need the dependency:resteasy-client -->
-                <!-- Import the RestEasy Client and jackson2/json-binding/json-p provider, we use
-                test scope
-                    as we need that for test purposes -->
+                <!-- Import the RestEasy Client and jackson2/json-binding/json-p 
+                    provider, we use test scope as we need that for test purposes -->
                 <dependency>
                     <groupId>org.jboss.resteasy</groupId>
                     <artifactId>resteasy-client</artifactId>
@@ -418,11 +392,6 @@ under the License.
                         <version>${maven-compiler-plugin.version}</version>
                         <configuration>
                             <annotationProcessorPaths>
-                                <annotationProcessorPath>
-                                    <groupId>org.projectlombok</groupId>
-                                    <artifactId>lombok</artifactId>
-                                    <version>${lombok.version}</version>
-                                </annotationProcessorPath>
                                 <annotationProcessorPath>
                                     <groupId>org.hibernate.orm</groupId>
                                     <artifactId>hibernate-processor</artifactId>
