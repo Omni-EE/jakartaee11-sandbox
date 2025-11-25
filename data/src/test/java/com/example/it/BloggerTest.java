@@ -143,7 +143,7 @@ public class BloggerTest {
         emf.getCache().evictAll();
 
         var foundByStatusAfterUpdated = blogger.byStatus(
-                null,
+                DRAFT,
                 Order.by(Sort.desc("createdAt")),
                 Limit.of(10)
         );
