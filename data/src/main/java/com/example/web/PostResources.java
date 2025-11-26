@@ -1,10 +1,15 @@
 package com.example.web;
 
 import com.example.blog.Blogger;
+
 import jakarta.data.page.PageRequest;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
 
 import java.util.UUID;
@@ -18,15 +23,9 @@ public class PostResources {
 
     @GET
     @Path("")
-    public Response getAll(
-            @QueryParam("title") @DefaultValue("") String title,
-            @QueryParam("page") @DefaultValue("1") long page,
+    public Response getAll(@QueryParam("title") @DefaultValue("") String title, @QueryParam("page") @DefaultValue("1") long page,
             @QueryParam("size") @DefaultValue("10") int size) {
-        var data = this.blogger
-                .allPosts(
-                        "%" + title + "%",
-                        PageRequest.ofPage(page, size, true)
-                );
+        var data = this.blogger.allPosts("%" + title + "%", PageRequest.ofPage(page, size, true));
 
         return Response.ok(new PaginatedResult<>(data.content(), data.totalElements())).build();
     }
@@ -34,8 +33,6 @@ public class PostResources {
     @GET
     @Path("/{id}")
     public Response getById(@PathParam("id") UUID id) {
-        return this.blogger.byId(id)
-                .map(p -> Response.ok(p).build())
-                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+        return this.blogger.byId(id).map(p -> Response.ok(p).build()).orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 }

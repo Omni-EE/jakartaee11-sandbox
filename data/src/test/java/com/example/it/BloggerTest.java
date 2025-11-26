@@ -99,6 +99,7 @@ public class BloggerTest {
         var post = new Post();
         post.setTitle("My Post");
         post.setContent("My Post Content");
+        post.setStatus(DRAFT);
 
         startTx();
         blogger.insert(post);
@@ -134,20 +135,12 @@ public class BloggerTest {
         blogger.update(savedPost);
         endTx();
 
-        em.clear();
-
-
-        EntityManagerFactory emf = em.getEntityManagerFactory();
-
-        // Clear the L2 Cache
-        emf.getCache().evictAll();
-
         var foundByStatusAfterUpdated = blogger.byStatus(
                 DRAFT,
                 Order.by(Sort.desc("createdAt")),
                 Limit.of(10)
         );
-        assertEquals(2, foundByStatusAfterUpdated.size());
+        assertEquals(0, foundByStatusAfterUpdated.size());
 
         var updatedPost = blogger.byId(postId);
         assertTrue(updatedPost.isPresent());

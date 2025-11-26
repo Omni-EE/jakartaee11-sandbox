@@ -4,6 +4,7 @@ import com.example.domain.Comment;
 import com.example.domain.Post;
 import com.example.repository.CommentRepository;
 import com.example.repository.PostRepository;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

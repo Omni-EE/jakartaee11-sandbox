@@ -5,6 +5,7 @@ import com.example.domain.Post;
 import com.example.domain.Status;
 import com.example.repository.CommentRepository;
 import com.example.repository.PostRepository;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Startup;
@@ -23,11 +24,11 @@ public class DataInitializer {
     @Inject
     CommentRepository commentRepository;
 
-    // `@Observes Startup event` or  `@Observes @Initialized(ApplicationScoped.class) Object any`
+    // `@Observes Startup event` or `@Observes @Initialized(ApplicationScoped.class) Object any`
     // raised exception `jakarta.data.exceptions.DataException: No active transaction for update or delete query`
-     public void init(@Observes Startup event) {
-    // public void init(@Observes @Initialized(ApplicationScoped.class) Object any) {
-    // when adding @Transactional on class, still failed the tests, the observer method does not work.
+    public void init(@Observes Startup event) {
+        // public void init(@Observes @Initialized(ApplicationScoped.class) Object any) {
+        // when adding @Transactional on class, still failed the tests, the observer method does not work.
 //    @PostConstruct
 //    public void init() {
         commentRepository.deleteAll();
