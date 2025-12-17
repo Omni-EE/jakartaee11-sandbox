@@ -1,5 +1,5 @@
 # Jakarta EE 11 Sandbox
-A playground of adopting Jakarta EE 11 new features
+A playground of adopting Jakarta EE 11 new features 
 
 
 ## Resources
