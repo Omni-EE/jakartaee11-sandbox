@@ -24,7 +24,6 @@ import java.util.UUID;
 public class Post implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
     @Basic(optional = false)

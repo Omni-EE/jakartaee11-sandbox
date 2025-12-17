@@ -21,7 +21,6 @@ import java.util.UUID;
 public class Comment implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
     @Basic(optional = false)

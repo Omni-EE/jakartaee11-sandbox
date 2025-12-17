@@ -12,6 +12,8 @@ import jakarta.enterprise.event.Startup;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import java.util.UUID;
+
 @Transactional
 @ApplicationScoped
 //@Singleton
@@ -36,21 +38,23 @@ public class DataInitializer {
 
         // insert two sample posts
         Post post1 = new Post();
+        post1.setId(UUID.randomUUID());
         post1.setTitle("Post 1");
         post1.setContent("Content 1");
         post1.setStatus(Status.DRAFT);
         postRepository.insert(post1);
 
         Post post2 = new Post();
+        post2.setId(UUID.randomUUID());
         post2.setTitle("Post 2");
         post2.setContent("Content 2");
         post2.setStatus(Status.DRAFT);
         postRepository.insert(post2);
 
         // insert two sample comments
-        Comment comment1 = Comment.builder().content("Comment 1").post(post1).build();
+        Comment comment1 = Comment.builder().id(UUID.randomUUID()).content("Comment 1").post(post1).build();
         commentRepository.insert(comment1);
-        Comment comment2 = Comment.builder().content("Comment 2").post(post1).build();
+        Comment comment2 = Comment.builder().id(UUID.randomUUID()).content("Comment 2").post(post1).build();
         commentRepository.insert(comment2);
     }
 }
