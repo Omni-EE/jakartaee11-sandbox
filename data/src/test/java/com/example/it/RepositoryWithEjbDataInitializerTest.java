@@ -98,6 +98,7 @@ public class RepositoryWithEjbDataInitializerTest {
     public void testEmployeeCurd() throws Exception {
         // insert a post
         var post = new Post();
+        post.setId(UUID.randomUUID());
         post.setTitle("My Post");
         post.setContent("My Post Content");
         startTx();
@@ -115,6 +116,7 @@ public class RepositoryWithEjbDataInitializerTest {
 
         // add a comment to the post
         var comment = new Comment();
+        comment.setId(UUID.randomUUID());
         comment.setContent("My Comment");
         comment.setPost(post);
         startTx();

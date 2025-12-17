@@ -97,6 +97,7 @@ public class BloggerTest {
     @Test
     public void testBlogger() throws Exception {
         var post = new Post();
+        post.setId(UUID.randomUUID());
         post.setTitle("My Post");
         post.setContent("My Post Content");
         post.setStatus(DRAFT);

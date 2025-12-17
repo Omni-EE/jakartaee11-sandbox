@@ -95,6 +95,7 @@ public class BlogServiceTest {
     public void testEmployeeCurd() throws Exception {
         // insert a post
         var post = new Post();
+        post.setId(UUID.randomUUID());
         post.setTitle("My Post");
         post.setContent("My Post Content");
         startTx();
@@ -105,6 +106,7 @@ public class BlogServiceTest {
         assertNotNull(postId);
 
         var comment = Comment.builder().content("test content").build();
+        comment.setId(UUID.randomUUID());
         startTx();
         var savedComment = blogService.addCommentForPost(postId, comment);
         endTx();
